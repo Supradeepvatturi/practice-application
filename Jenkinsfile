@@ -9,7 +9,7 @@ pipeline{
         choice(name: 'action', choices: 'create\ndelete', description: 'Choose create/Destroy')
         string(name: 'ImageName', description: "name of the docker build", defaultValue: 'javapp')
         string(name: 'ImageTag', description: "tag of the docker build", defaultValue: 'v1')
-        string(name: 'supradeepdocker', description: "name of the Application", defaultValue: 'Supradeepvatturi')
+        string(name: 'supradeepdocker', description: "name of the Application", defaultValue: 'supradeepdocker')
     }
 
     stages{
@@ -77,7 +77,7 @@ pipeline{
             steps{
                script{
                    
-                   dockerBuild("${params.ImageName}","${params.ImageTag}","${params.DockerHubUser}")
+                   dockerBuild("${params.ImageName}","${params.ImageTag}","${params.supradeepdocker}")
                }
             }
         }
@@ -86,7 +86,7 @@ pipeline{
             steps{
                script{
                    
-                   dockerImageScan("${params.ImageName}","${params.ImageTag}","${params.DockerHubUser}")
+                   dockerImageScan("${params.ImageName}","${params.ImageTag}","${params.supradeepdocker}")
                }
             }
         }
@@ -95,7 +95,7 @@ pipeline{
             steps{
                script{
                    
-                   dockerImagePush("${params.ImageName}","${params.ImageTag}","${params.DockerHubUser}")
+                   dockerImagePush("${params.ImageName}","${params.ImageTag}","${params.supradeepdocker}")
                }
             }
         }  
@@ -104,7 +104,7 @@ pipeline{
             steps{
                script{
                    
-                   dockerImageCleanup("${params.ImageName}","${params.ImageTag}","${params.DockerHubUser}")
+                   dockerImageCleanup("${params.ImageName}","${params.ImageTag}","${params.supradeepdocker}")
                }
             }
         }      
